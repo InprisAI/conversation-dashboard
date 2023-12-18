@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Inpris HumAIns Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      background-color: #4a4f6a;
+      color: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      word-wrap: break-word;
+      max-width: 300px;
+    }
+    th {
+      background-color: #4a4f6a;
+      color: white;
+      font-weight: 700;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 12px 20px;
+      margin: 0 4px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 4px;
+    }
+    input {
+      flex-grow: 1;
+    }
+    button {
+      background-color: #4a4f6a;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover {
+      background-color: #3f4560;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inpris HumAIns Dashboard</h1>
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search by ID" />
+	<button type="button" id="search-button">Search</button>
+  </div>
+  <table id="dashboard-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Timestamp</th>
+        <th>Conversation Goal</th>
+        <th>Task Goal</th>
+        <th>Name</th>
+        <th>Class Level</th>
+        <th>Task Level</th>
+        <th>Conversation Sentiment</th>
+        <th>Student Cooperation</th>
+        <th>Student Goal</th>
+        <th>Next Action</th>
+        <th>Conversation Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script src="script.js"></script>
+</body>
+</html>
