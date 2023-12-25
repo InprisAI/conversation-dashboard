@@ -80,6 +80,7 @@ function makeTable(data) {
   for (i=0; i < jsonData["data"].length; i++) {
 
     var rowData = {
+      time: jsonData["data"][i]["time"],
       client_id: jsonData["client_id"],
       conversation_id: jsonData["conversation_id"],
       analysis: jsonData["data"][i]["content"]["json_metadata"]["analysis"],
@@ -111,7 +112,6 @@ function fetchData(url) {
     })
     .then((fileContents) => {
       makeTable(fileContents);
-      debugger;
 
       // Handle the file contents here
       // console.log(fileContents);
@@ -131,9 +131,9 @@ $("#refresh-button").click(function () {
   //   body: JSON.stringify(params),
   // });
 
-  const baseURL = 'http://127.0.0.1:5000/dashboard-conv'
+  const baseURL =  'https://humains-core-dev.appspot.com/dashboard-conv' // 'http://127.0.0.1:5000/dashboard-conv'
   const params = {
-    conversation_id : 'GcD67kmvcdvuKvfcyJyyDvh',
+    conversation_id : 'bvydjzvbyfjdgdX', //'GcD67kmvcdvuKvfcyJyyDvh',
     client_id : 'test:d4n4',
     state_name : 'D4N4_CHAT_STATE'
   }
