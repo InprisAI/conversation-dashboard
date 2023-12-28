@@ -1,6 +1,7 @@
 
 body {
-  font-family: 'Roboto', Arial, sans-serif;
+  /* font-family: 'Roboto', Arial, sans-serif; */
+  font-family: "Roboto", Helvetica;
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
@@ -23,7 +24,7 @@ table {
 
 td {
   color: grey;
-    font-family: var(--font-family-roboto);
+    font-family: "Roboto", Helvetica;
     font-size: large;
     font-style: normal;
     font-weight: 400;
@@ -39,6 +40,7 @@ th {
   color: white;
   font-weight: 700;
   font-size: large;
+  font-family: "Roboto", Helvetica;
 }
 
 tr:nth-child(even) {
