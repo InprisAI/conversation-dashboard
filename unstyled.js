@@ -42,7 +42,7 @@ function makeTable(data) {
       // Create a new row element and populate it with the data
       var newRow = $("<tr>");
       $.each(rowData, function(key, value) {
-          newRow.append($("<td>").text(value));
+          newRow.append($("<td >").text(value));
       });
     
       // Append the new row to the table's tbody
@@ -69,10 +69,12 @@ function fetchData(url) {
 }
 
 function refreshData() {
+
   fetchData(currentUrl);
 }
 
 $("#refresh-button").click(function () {
+  currentUrl = 'https://humains-core-dev.appspot.com/dashboard-conv?client_id=test:d4n4&phone_number=0508717899'
   refreshData()
 });
 
