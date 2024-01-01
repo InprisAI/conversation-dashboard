@@ -112,12 +112,15 @@ $("#search-button").click(function () {
   if (pattern.test(serchString)) {
     currentUrl = `${prodURL}?client_id=${client_id}&conversation_id=${serchString}`
   } else {
-    currentUrl = `${prodURL}?client_id=${client_id}&phone_number=${serchString}`
+    let phone = serchString.replace(/[-]/g, '')
+    if (phone.startsWith('+972') || phone.startsWith('972')) 
+      phone.replace(/^(\+972|972)/, '0');
+    currentUrl = `${prodURL}?client_id=${client_id}&phone_number=${phone}`
   } 
   fetchData(currentUrl);
 });
 
-var intervalId = setInterval(refreshData, 5000);
+// var intervalId = setInterval(refreshData, 5000);
 
 // $(document).ready(function() {
 
