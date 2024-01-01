@@ -94,7 +94,7 @@ function refreshData() {
 }
 
 $("#refresh-button").click(function () {
-  currentUrl = 'https://humains-core-dev.appspot.com/dashboard-conv?client_id=test:d4n4&phone_number=0508717899'
+  // currentUrl = 'https://humains-core-dev.appspot.com/dashboard-conv?client_id=test:d4n4&phone_number=0508717899'
   refreshData()
 });
 
@@ -116,7 +116,7 @@ $("#search-button").click(function () {
   fetchData(currentUrl);
 });
 
-// var intervalId = setInterval(refreshData, 5000);
+var intervalId = setInterval(refreshData, 5000);
 
 // $(document).ready(function() {
 
