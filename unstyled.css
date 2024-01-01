@@ -90,21 +90,25 @@ tr:hover {
   margin-bottom: 10px;
 }
 
+#search-input{
+  border-radius: 28px;
+}
+
 /* Style the left and right divs */
 .left {
   flex: 1; /* Take up available space on the left */
   text-align: left; /* Align the input to the left */
 }
-
+/* 
 .right {
-  text-align: right; /* Align the buttons to the right */
+  text-align: right; 
 }
 
-/* Style the buttons if needed */
+ Style the buttons if needed 
 .right button {
-  margin-left: 7px; /* Add some spacing between the buttons */
+  margin-left: 7px; 
   border-radius: 33px;
-}
+} */
 
 
 input, button {
@@ -115,6 +119,7 @@ input, button {
   border-radius: 6px;
 }
 
+
 input {
   flex-grow: 1;
 }
@@ -124,6 +129,7 @@ button {
   color: white;
   cursor: pointer;
   font-weight: 700;
+  border-radius: 33px;
 }
 
 button:hover {
