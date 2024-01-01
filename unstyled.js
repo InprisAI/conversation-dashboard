@@ -72,20 +72,21 @@ function makeTable(data) {
 }
 
 function fetchData(url) {
-
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text(); // You can also use response.json() for JSON data
-    })
-    .then((fileContents) => {
-      makeTable(fileContents);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+  if (url.length > 10){
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text(); // You can also use response.json() for JSON data
+      })
+      .then((fileContents) => {
+        makeTable(fileContents);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 }
 
 function refreshData() {

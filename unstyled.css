@@ -82,7 +82,7 @@ tr:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: transparent;
   margin-bottom: 10px;
 }
@@ -94,7 +94,7 @@ tr:hover {
 
 /* Style the left and right divs */
 .left {
-  flex: 1; /* Take up available space on the left */
+  flex: 1; /*Take up available space on the left */
   text-align: left; /* Align the input to the left */
   line-height: 15px;
 }
