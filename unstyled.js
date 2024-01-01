@@ -14,9 +14,7 @@ function getFormattedDate(inputDateString){
   var minutes = ('0' + dateObj.getUTCMinutes()).slice(-2);
   var seconds = ('0' + dateObj.getUTCSeconds()).slice(-2);
 
-  // Assemble the formatted date and time
   var formattedDate = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
-
   return formattedDate
 }
 
