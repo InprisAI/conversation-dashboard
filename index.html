@@ -12,11 +12,15 @@
 <body>
   <h1>Inpris Conversation Dashboard</h1>
   <div class="search-container">
-    <input type="text" id="search-input" placeholder="Search by ID" />
-	<button type="button" id="search-button">Search</button>
-  <button type="button" id="refresh-button">Refresh</button>
+    <div class="left">
+      <input type="text" id="search-input" placeholder="Search by ID" />
+    </div>
+    <div class="right">
+      <button type="button" id="search-button">Search</button>
+      <button type="button" id="refresh-button">Refresh</button>
+    </div>
   </div>
-  <table id="dashboard-table">
+  <table id="dashboard-table" class="rounded-table">
     <thead>
       <tr>
         <th>time</th> 
