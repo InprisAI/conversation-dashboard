@@ -52,7 +52,7 @@ function makeTable(data) {
         newRow.append($("<td >").text(currentRow["tag"]))
         newRow.append($("<td class='clickable-serach'>").text(key.substring(0,5)))
         newRow.append($("<td >").text(currentRow["content"]["json_metadata"]["analysis"]))
-        newRow.append($("<td >").text(currentRow["content"]["json_metadata"]["customer"]))
+        newRow.append($("<td >").text( (currentRow["content"]["json_metadata"]["confirmed_name"] || "-")))
         newRow.append($("<td >").text(currentRow["content"]["convers_content"]))
       }
     
