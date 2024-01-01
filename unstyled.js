@@ -7,6 +7,9 @@ function getFormattedDate(inputDateString){
   
   var dateObj = new Date(inputDateString);
 
+
+  dateObj.setUTCHours(dateObj.getUTCHours() + 2);
+
   var day = ('0' + dateObj.getUTCDate()).slice(-2);
   var month = ('0' + (dateObj.getUTCMonth() + 1)).slice(-2);
   var year = dateObj.getUTCFullYear().toString().slice(-2);
