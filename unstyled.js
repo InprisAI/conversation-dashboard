@@ -3,9 +3,24 @@ const prodURL = 'https://humains-core-dev.appspot.com/dashboard-conv';
 const devURL = 'http://127.0.0.1:5000/dashboard-conv';
 const client_id = 'test:d4n4';
 
+function getFormattedDate(inputDateString){
+  
+  var dateObj = new Date(inputDateString);
+
+  var day = ('0' + dateObj.getUTCDate()).slice(-2);
+  var month = ('0' + (dateObj.getUTCMonth() + 1)).slice(-2);
+  var year = dateObj.getUTCFullYear().toString().slice(-2);
+  var hours = ('0' + dateObj.getUTCHours()).slice(-2);
+  var minutes = ('0' + dateObj.getUTCMinutes()).slice(-2);
+  var seconds = ('0' + dateObj.getUTCSeconds()).slice(-2);
+
+  // Assemble the formatted date and time
+  var formattedDate = day + '.' + month + '.' + year + ' ' + hours + ':' + minutes + ':' + seconds;
+
+  return formattedDate
+}
+
 function makeTable(data) {
-
-
   $('#dashboard-table tbody').empty();
   var jsonData = {};
   try {
@@ -19,36 +34,43 @@ function makeTable(data) {
   for (var j = 0; j < keys.length; j++) {
     var key = keys[j];
     for (i=0; i < jsonData["data"][key].length; i++) {
-      var rowData = {}
+      var newRow = $("<tr>");
+
+      // var rowData = {}
       var currentRow = jsonData["data"][key][i];
       if (currentRow["tag"] == "Customer") {
-        rowData["time"] = currentRow["time"]
-        rowData["speaker"] = currentRow["tag"]
-        rowData["conversation_id"] = key
-        rowData["analysis"] = "-"
-        rowData["customer"] = "-"
-        rowData["content"] = currentRow["content"]
+        newRow.append($("<td >").text(getFormattedDate(currentRow["time"])))
+        newRow.append($("<td >").text(currentRow["tag"]))
+        newRow.append($("<td class='clickable-serach'>").text(key))
+        newRow.append($("<td >").text("-"))
+        newRow.append($("<td >").text("-"))
+        newRow.append($("<td >").text(currentRow["content"]))
       }
       else {  
-        rowData["time"] = currentRow["time"]
-        rowData["speaker"] = currentRow["tag"]
-        rowData["conversation_id"] = key
-        rowData["analysis"] = currentRow["content"]["json_metadata"]["analysis"]
-        rowData["customer"] = currentRow["content"]["json_metadata"]["customer"]
-        rowData["content"] = currentRow["content"]["convers_content"]
+        newRow.append($("<td >").text(getFormattedDate(currentRow["time"])))
+        newRow.append($("<td >").text(currentRow["tag"]))
+        newRow.append($("<td class='clickable-serach'>").text(key))
+        newRow.append($("<td >").text(currentRow["content"]["json_metadata"]["analysis"]))
+        newRow.append($("<td >").text(currentRow["content"]["json_metadata"]["customer"]))
+        newRow.append($("<td >").text(currentRow["content"]["convers_content"]))
       }
     
-  
       // Create a new row element and populate it with the data
-      var newRow = $("<tr>");
-      $.each(rowData, function(key, value) {
-          newRow.append($("<td >").text(value));
-      });
+      // var newRow = $("<tr>");
+      // $.each(rowData, function(key, value) {
+
+      //     newRow.append($("<td >").text(value));
+      // });
+
     
       // Append the new row to the table's tbody
       $("#dashboard-table tbody").append(newRow);
     }
   }
+
+  $('.clickable-serach').on('click', function() {
+    redirectToConversation(key)
+  });
 }
 
 function fetchData(url) {
@@ -78,6 +100,11 @@ $("#refresh-button").click(function () {
   refreshData()
 });
 
+function redirectToConversation(key){
+  const url = `${prodURL}?client_id=${client_id}&conversation_id=${key}`
+  fetchData(url)
+}
+
 $("#search-button").click(function () {
   // todo - get the data from search-input
   // determine if its phone number or IdleDeadlinecreate querystring and fetch
@@ -91,4 +118,9 @@ $("#search-button").click(function () {
   fetchData(currentUrl);
 });
 
-var intervalId = setInterval(refreshData, 5000);
+// var intervalId = setInterval(refreshData, 5000);
+
+// $(document).ready(function() {
+
+// })
+
