@@ -15,9 +15,9 @@ body {
 h1 {
   /* background-color: #000000; */
   color: #000000;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
   letter-spacing: 0.14px;
-  font-size: 34px;
+  font-size: 38px;
   font-family: "Jura", Helvetica;
   font-weight: 300;
 }
@@ -54,7 +54,7 @@ th {
   color: white;
   font-weight: 700;
   font-size: large;
-  line-height: 24px;
+  line-height: 36px;
   font-family: "Roboto", Helvetica;
 }
 
@@ -73,7 +73,7 @@ tr:hover {
 }
 
 .rounded-table {
-  border-radius: 15px; /* Adjust the value to control the roundness */
+  border-radius: 7px; /* Adjust the value to control the roundness */
   overflow: hidden; /* Ensures content within the table doesn't overflow the rounded corners */
 }
 
@@ -82,9 +82,8 @@ tr:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px; */
+  padding: 10px;
   background-color: transparent;
-  border-radius: 33px;
   margin-bottom: 10px;
 }
 
@@ -97,6 +96,7 @@ tr:hover {
 .left {
   flex: 1; /* Take up available space on the left */
   text-align: left; /* Align the input to the left */
+  line-height: 15px;
 }
 /* 
 .right {
@@ -111,7 +111,7 @@ tr:hover {
 
 
 input, button {
-  padding: 12px 20px;
+  padding: 7px 20px;
   margin: 0 1px;
   box-sizing: border-box;
   border: 1px solid;
