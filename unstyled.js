@@ -21,6 +21,34 @@ function getFormattedDate(inputDateString){
   return formattedDate
 }
 
+function getSortedKeys(obj){
+  var keys = Object.keys(obj);
+
+  keys.sort(function(key1, key2) {
+
+      var time1 
+      var time2 
+      try{ 
+        time1 = obj[key1][0].time ? new Date(obj[key1][0].time) : new Date(0); 
+      }
+      catch { 
+        time1 = new Date(0); 
+      }
+      try{ 
+        time2 = obj[key2][0].time ? new Date(obj[key2][0].time) : new Date(0);
+      }
+      catch{
+        time2 = new Date(0);
+      }
+      // Compare the time values in reverse order (latest to soonest)
+      return time2 - time1;
+
+  });
+
+  return keys;
+
+}
+
 function makeTable(data) {
   $('#dashboard-table tbody').empty();
   var jsonData = {};
@@ -31,7 +59,8 @@ function makeTable(data) {
       console.error("Error parsing JSON:", error);
   }
 
-  var keys = Object.keys(jsonData["data"]);
+  // var keys = Object.keys(jsonData["data"]);
+  var keys = getSortedKeys(jsonData["data"])
   for (var j = 0; j < keys.length; j++) {
     var key = keys[j];
     for (i=0; i < jsonData["data"][key].length; i++) {
@@ -108,8 +137,6 @@ function redirectToConversation(key){
 }
 
 $("#search-button").click(function () {
-  // todo - get the data from search-input
-  // determine if its phone number or IdleDeadlinecreate querystring and fetch
   var serchString = $('#search-input')[0].value
   var pattern = /[A-Za-z]/;
   if (pattern.test(serchString)) {
@@ -123,9 +150,4 @@ $("#search-button").click(function () {
   fetchData(currentUrl);
 });
 
-// var intervalId = setInterval(refreshData, 5000);
-
-// $(document).ready(function() {
-
-// })
-
+var intervalId = setInterval(refreshData, 5000);
