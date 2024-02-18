@@ -1,8 +1,8 @@
 var currentUrl = '';
 var g_phone = '';
 const prodURL = 'https://humains-core-dev.appspot.com';
-const devURL = 'http://127.0.0.1:5000/';
-// const prodURL = 'http://127.0.0.1:5000/dashboard-conv'; 
+const devURL = 'http://127.0.0.1:5000';
+// const prodURL = 'http://127.0.0.1:5000'; 
 const client_id = 'test:d4n4';
 
 function getFormattedDate(inputDateString){
@@ -141,6 +141,29 @@ function redirectToConversation(key){
   const url = `${prodURL}/dashboard-conv?client_id=${client_id}&conversation_id=${key}`
   fetchData(url)
 }
+
+
+$("#sms-button").click(function () {
+
+  let longUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScMcrZVNrUm-V4tV-0mc3GBQ3rG23v1BUCngBHfyqx-ViqCmw/viewform'
+  let shortUrl = 'https://shorturl.at/vCGKV'
+
+  text = 'תודה שהשתתפתם בניסוי שיחה עם רובוט לסיוע מערך הגביה. נשמח אם תוכלו לדרג את החוויה בטופס המצ"ב.'
+  text2 = 'יתכן שנתקשר אליכם שוב בימים הקרובים לאחר ביצוע עדכונים במערכת'
+
+  fullText = `${text}\n\n${text2}\n\n${shortUrl}`
+
+  if (g_phone){ 
+    const url = prodURL + '/send_sms?to=' + g_phone + '&text=' + fullText
+    $.get(url, function(data, status) {
+        console.log('Status:', status);
+        console.log('Data:', data);
+    }).fail(function(xhr, status, error) {
+      // Handle error situation
+      console.log('Error:', status, error);
+    });
+  }
+})
 
 $("#hangup-button").click(function () {
   let phone = g_phone
