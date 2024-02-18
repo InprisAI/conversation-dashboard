@@ -1,6 +1,8 @@
 var currentUrl = '';
-const prodURL = 'https://humains-core-dev.appspot.com/dashboard-conv';
-const devURL = 'http://127.0.0.1:5000/dashboard-conv';
+var g_phone = '';
+const prodURL = 'https://humains-core-dev.appspot.com';
+const devURL = 'http://127.0.0.1:5000/';
+// const prodURL = 'http://127.0.0.1:5000/dashboard-conv'; 
 const client_id = 'test:d4n4';
 
 function getFormattedDate(inputDateString){
@@ -71,7 +73,7 @@ function makeTable(data) {
       if (currentRow["tag"] == "Customer") {
         newRow.append($("<td >").text(getFormattedDate(currentRow["time"])))
         newRow.append($("<td >").text(currentRow["tag"]))
-        newRow.append($("<td class='clickable-serach'>").text(key.substring(0,5)))
+        newRow.append($("<td class='clickable-serach'>").text(key)) // .substring(0,5)
         newRow.append($("<td >").text("-"))
         newRow.append($("<td >").text("-"))
         newRow.append($("<td >").text(currentRow["content"]))
@@ -79,7 +81,7 @@ function makeTable(data) {
       else {  
         newRow.append($("<td >").text(getFormattedDate(currentRow["time"])))
         newRow.append($("<td >").text(currentRow["tag"]))
-        newRow.append($("<td class='clickable-serach'>").text(key.substring(0,5)))
+        newRow.append($("<td class='clickable-serach'>").text(key)) // .substring(0,5)
         newRow.append($("<td >").text(currentRow["content"]["json_metadata"]["analysis"]))
         newRow.append($("<td >").text( (currentRow["content"]["json_metadata"]["confirmed_name"] || "-")))
         newRow.append($("<td >").text(currentRow["content"]["convers_content"]))
@@ -121,31 +123,64 @@ function fetchData(url) {
   }
 }
 
+$(document).ready(function() {
+  console.log("Page load complete with jQuery");
+});
+
 function refreshData() {
 
   fetchData(currentUrl);
 }
 
 $("#refresh-button").click(function () {
-  // currentUrl = 'https://humains-core-dev.appspot.com/dashboard-conv?client_id=test:d4n4&phone_number=0508717899'
+  // currentUrl = 'https://humains-core-dev.appspot.com/dashboard-conv?client_id=test:an3el2&conversation_id=htdsbgsdbg' htdsbgsdbg an3el2 
   refreshData()
 });
 
 function redirectToConversation(key){
-  const url = `${prodURL}?client_id=${client_id}&conversation_id=${key}`
+  const url = `${prodURL}/dashboard-conv?client_id=${client_id}&conversation_id=${key}`
   fetchData(url)
 }
+
+$("#hangup-button").click(function () {
+  let phone = g_phone
+  if (phone.startsWith('0'))
+    phone = phone.replace(/^0/, "972")
+
+  const hangupUrl = prodURL + '/twilio_hangup?phone=' + phone
+  $.get(hangupUrl, function(data, status) {
+      console.log('Status:', status);
+      console.log('Data:', data);
+
+      const unhangupUrl = prodURL + '/twilio_cancel_hangup?phone=' + phone
+      $.get(unhangupUrl, function(data, status) {
+          console.log('Status:', status);
+          console.log('Data:', data);
+      }).fail(function(xhr, status, error) {
+        // Handle error situation
+        console.log('Error:', status, error);
+      });
+
+      // Process the response data here
+      // For example, display it in the console or on the webpage
+  }).fail(function(xhr, status, error) {
+      // Handle error situation
+      console.log('Error:', status, error);
+  });
+  
+})
 
 $("#search-button").click(function () {
   var serchString = $('#search-input')[0].value
   var pattern = /[A-Za-z]/;
   if (pattern.test(serchString)) {
-    currentUrl = `${prodURL}?client_id=${client_id}&conversation_id=${serchString}`
+    currentUrl = `${prodURL}/dashboard-conv?client_id=${client_id}&conversation_id=${serchString}`
   } else {
     let phone = serchString.replace(/[-]/g, '')
     if (phone.startsWith('+972') || phone.startsWith('972')) 
       phone.replace(/^(\+972|972)/, '0');
-    currentUrl = `${prodURL}?client_id=${client_id}&phone_number=${phone}`
+    g_phone = phone;
+    currentUrl = `${prodURL}/dashboard-conv?client_id=${client_id}&phone_number=${phone}`
   } 
   fetchData(currentUrl);
 });

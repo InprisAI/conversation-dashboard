@@ -109,6 +109,9 @@ tr:hover {
   border-radius: 33px;
 } */
 
+#hangup-button{
+  background-color:red
+}
 
 input, button {
   padding: 7px 20px;
