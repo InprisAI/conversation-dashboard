@@ -176,13 +176,15 @@ $("#hangup-button").click(function () {
       console.log('Data:', data);
 
       const unhangupUrl = prodURL + '/twilio_cancel_hangup?phone=' + phone
-      $.get(unhangupUrl, function(data, status) {
-          console.log('Status:', status);
-          console.log('Data:', data);
-      }).fail(function(xhr, status, error) {
-        // Handle error situation
-        console.log('Error:', status, error);
-      });
+      setTimeout(function() {
+        $.get(unhangupUrl, function(data, status) {
+            console.log('Status:', status);
+            console.log('Data:', data);
+        }).fail(function(xhr, status, error) {
+            // Handle error situation
+            console.log('Error:', status, error);
+        });
+    }, 5000);
 
       // Process the response data here
       // For example, display it in the console or on the webpage
