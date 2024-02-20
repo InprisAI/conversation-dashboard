@@ -1,7 +1,9 @@
 var currentUrl = '';
 var g_phone = '';
-const prodURL = 'https://humains-core-dev.appspot.com';
-const devURL = 'http://127.0.0.1:5000';
+const prodURL = 'https://chatwith.humains.com'
+const devURL = 'https://humains-core-dev.appspot.com';
+const localURL = 'http://127.0.0.1:5000';
+var g_url = prodURL;
 // const prodURL = 'http://127.0.0.1:5000'; 
 const client_id = 'test:d4n4';
 
@@ -138,7 +140,7 @@ $("#refresh-button").click(function () {
 });
 
 function redirectToConversation(key){
-  const url = `${prodURL}/dashboard-conv?client_id=${client_id}&conversation_id=${key}`
+  const url = `${g_url}/dashboard-conv?client_id=${client_id}&conversation_id=${key}`
   fetchData(url)
 }
 
@@ -154,7 +156,7 @@ $("#sms-button").click(function () {
   fullText = `${text}\n\n${text2}\n\n${shortUrl}`
 
   if (g_phone){ 
-    const url = prodURL + '/send_sms?to=' + g_phone + '&text=' + fullText
+    const url = g_url + '/send_sms?to=' + g_phone + '&text=' + fullText
     $.get(url, function(data, status) {
         console.log('Status:', status);
         console.log('Data:', data);
@@ -170,12 +172,13 @@ $("#hangup-button").click(function () {
   if (phone.startsWith('0'))
     phone = phone.replace(/^0/, "972")
 
-  const hangupUrl = prodURL + '/twilio_hangup?phone=' + phone
+  console.log('hangup-button')
+  const hangupUrl = g_url + '/twilio_hangup?phone=' + phone
   $.get(hangupUrl, function(data, status) {
       console.log('Status:', status);
       console.log('Data:', data);
 
-      const unhangupUrl = prodURL + '/twilio_cancel_hangup?phone=' + phone
+      const unhangupUrl = g_url + '/twilio_cancel_hangup?phone=' + phone
       setTimeout(function() {
         $.get(unhangupUrl, function(data, status) {
             console.log('Status:', status);
@@ -199,13 +202,13 @@ $("#search-button").click(function () {
   var serchString = $('#search-input')[0].value
   var pattern = /[A-Za-z]/;
   if (pattern.test(serchString)) {
-    currentUrl = `${prodURL}/dashboard-conv?client_id=${client_id}&conversation_id=${serchString}`
+    currentUrl = `${g_url}/dashboard-conv?client_id=${client_id}&conversation_id=${serchString}`
   } else {
     let phone = serchString.replace(/[-]/g, '')
     if (phone.startsWith('+972') || phone.startsWith('972')) 
       phone.replace(/^(\+972|972)/, '0');
     g_phone = phone;
-    currentUrl = `${prodURL}/dashboard-conv?client_id=${client_id}&phone_number=${phone}`
+    currentUrl = `${g_url}/dashboard-conv?client_id=${client_id}&phone_number=${phone}`
   } 
   fetchData(currentUrl);
 });
