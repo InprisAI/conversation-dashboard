@@ -126,7 +126,17 @@ function fetchData(url) {
 }
 
 $(document).ready(function() {
-  console.log("Page load complete with jQuery");
+  // Check if the URL contains '/dev' after 'url.com'
+  if (window.location.href.includes('dev')) {
+      g_url = devURL;
+      var h2Element = $('<h2>', {
+          text: 'Development environment'
+      }).css('color', 'red')
+      .css('font-size', '44px'); 
+
+      // Append the <h2> element to the body or any other container
+      $('body').prepend(h2Element);
+  }
 });
 
 function refreshData() {
